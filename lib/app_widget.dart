@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_heroes/heroes_list.dart';
-import 'package:marvel_heroes/screen_login.dart';
-import 'package:marvel_heroes/screen_register.dart';
-import 'package:marvel_heroes/screen_resetpasswd.dart';
+import 'package:marvel_heroes/login_screen/screen_login.dart';
+import 'package:marvel_heroes/login_screen/screen_register.dart';
+import 'package:marvel_heroes/login_screen/screen_resetpasswd.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

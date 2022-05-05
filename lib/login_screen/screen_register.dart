@@ -81,16 +81,10 @@ class _RegisterState extends State<Register> {
           ),
           ElevatedButton(
             onPressed: () async {
-              try {
-                if (_key.currentState!.validate()) {
-                  await registerFirebase(
-                      email: _controllerEmail.text,
-                      password: _controllerPassWd.text);
-
-                  errorMessage = '';
-                }
-              } on FirebaseAuthException catch (error) {
-                errorMessage = error.message!;
+              {
+                await registerFirebase(
+                    email: _controllerEmail.text,
+                    password: _controllerPassWd.text);
               }
             },
             child: const Text('Create Account'),
