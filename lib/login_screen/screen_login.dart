@@ -1,14 +1,7 @@
 import 'dart:developer';
-import 'dart:typed_data';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:marvel_heroes/heroes_list.dart';
-import '../app_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,10 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> loginFirebase(
       {required String email, required String password}) async {
-    final user = await clientFirebase.signInWithEmailAndPassword(
-        email: email, password: password);
+    try {
+      final user = await clientFirebase.signInWithEmailAndPassword(
+          email: email, password: password);
 
-    log(user.toString());
+      log(user.toString());
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   @override
@@ -117,18 +114,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: ElevatedButton(
                   onPressed: () async {
-                    try {
-                      if (_key.currentState!.validate()) {
-                        await loginFirebase(
-                            email: _controllerEmail.text,
-                            password: _controllerPassWd.text);
+                    await loginFirebase(
+                        email: _controllerEmail.text,
+                        password: _controllerPassWd.text);
 
-                        errorMessage = '';
-                        Navigator.popAndPushNamed(context, '/heroes');
-                      }
-                    } on FirebaseAuthException catch (error) {
-                      errorMessage = error.message!;
-                    }
+                    Navigator.popAndPushNamed(context, '/heroes');
                   },
                   child: const Text(
                     'Login',

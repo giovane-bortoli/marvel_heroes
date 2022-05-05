@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'dart:developer';
-import 'app_widget.dart';
-import 'package:flutter/material.dart';
 import 'models/character_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,9 +27,6 @@ class _HeroesListState extends State<HeroesList> {
           IconButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
-
-                /*FirebaseAuth.instance.sendPasswordResetEmail(
-                    email: 'giovane.goularte@gmail.com');*/
 
                 Navigator.popAndPushNamed(context, '/login');
               },
